@@ -37,10 +37,10 @@ label input[type='checkbox']{vertical-align:middle;}
 .weightComment{height:25px;font-size:13px;padding-bottom:5px;}
 .btn{width:100px;text-align:center;}
 
-#step{background-color:#e6e7e8;margin:8px 0px;padding:5px 2px 0px 2px;}
-#step > *{padding-bottom:10px;}
-ol,ul{margin:0px;padding:0px 0px 0px 20px;}
-ol li:not(:last-child){margin-bottom:10px;}
+#step{background-color:#e6e7e8;margin:8px 0px;}
+#step > *{padding:10px 2px;}
+ol,ul{margin:0px;padding:10px 0px 0px 20px !important;}
+ol li:not(:last-child){padding-bottom:10px;}
 
 
 
