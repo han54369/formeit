@@ -145,11 +145,9 @@ function drawRecipe(isUserChange) {
 		let seq = step.seq;
 		let tip = step.tip;
 		if(txt){
-			stepHtml.push(`<p>`);
 			for(let i in txt){
 				stepHtml.push(`<div>${txt[i]}</div>`);
 			}
-			stepHtml.push(`</p>`);
 		}
 		if(seq){
 			stepHtml.push(`<ol>`);
@@ -159,11 +157,9 @@ function drawRecipe(isUserChange) {
 			stepHtml.push(`</ol>`);
 		}
 		if(tip){
-			stepHtml.push(`<p>`);
 			for(let i in tip){
 				stepHtml.push(`<div>${tip[i]}</div>`);
 			}
-			stepHtml.push(`</p>`);
 		}
 	}
 	
