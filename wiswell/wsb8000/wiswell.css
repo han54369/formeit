@@ -37,7 +37,8 @@ label{cursor:pointer;}
 .btn{width:100px;text-align:center;}
 
 #step{background-color:#e6e7e8;margin:8px 0px;}
-ol,ul{margin:0px;padding:0px 0px 0px 20px;}
+ol,ul{margin:0px;padding:10px 0px 1px 20px;}
+ol li{margin-bottom:10px;}
 
 
 
