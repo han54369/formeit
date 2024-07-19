@@ -132,7 +132,7 @@ function drawRecipe(isUserChange) {
 	
 	let recipeComment = breads[selBreadsIdx].recipeComment;
 	if(recipeComment) {
-		html.push(`<div class="dt under">`);
+		html.push(`<div class="dt under" style="padding-bottom:10px;">`);
 		for(let i in recipeComment){
 			html.push(`<div class="dtr"><div class="dtc">${recipeComment[i]}</div></div>`);
 		}
