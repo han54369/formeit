@@ -121,7 +121,7 @@ function drawRecipe(isUserChange) {
 		html.push(`	<div class="dt under" style="padding-bottom:10px;">
 						<div class="dtr">
 							<div class="dtc">
-								<label><input type="checkbox" onchange="rememberRatio()" id="rememberRatio"${isRememberRatio ? ' checked="checked"' : '""'}>현재 중량 저장</label>
+								<label><input type="checkbox" onchange="rememberRatio()" id="rememberRatio"${isRememberRatio ? ' checked="checked"' : '""'}> 현재 중량 저장</label>
 							</div>
 							<div class="dtc tar" style="padding-right:10px;">
 								<input type="button" onclick="defaultRatio()" value="현재 중량 초기화"/><br/>
