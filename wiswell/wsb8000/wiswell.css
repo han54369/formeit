@@ -5,7 +5,7 @@
 
 
 /* FOR ME, IT */
-.body{max-width:400px;margin:auto;font-family:roboto;}
+.body{max-width:400px;margin:auto;font-family:MaplestoryLight,roboto;}
 
 .dt{display:table;width:100%;/* table-layout:fixed; */}
 .dtr{display:table-row;}
@@ -38,3 +38,11 @@ label{cursor:pointer;}
 
 #step{background-color:#e6e7e8;margin:8px 0px;}
 ol,ul{margin:0px;padding:0px 0px 0px 20px;}
+
+
+
+@font-face {
+    font-family: 'MaplestoryLight';
+    src: url('../../font/MaplestoryLight.woff') format('woff');
+    font-display: swap;
+}
