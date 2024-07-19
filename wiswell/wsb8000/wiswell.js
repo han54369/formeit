@@ -21,7 +21,7 @@ function getMode(num){
 
 function drawModes() {
 	let html = new Array();
-	for (let i in wiswell) {
+	for (let i=0; i<wiswell.length; i++) {
 		html.push(`<option value="${i}"${i == getMode(1) ? 'selected="selected"' : ''}>${wiswell[i].mode}</option>`);
 	}
 	$("select[name='modes']").html(html.join(""));
@@ -38,7 +38,7 @@ function drawBreads(isUserChange) {
 	
 	let html = new Array();
 	let breads = wiswell[selModesIdx].breads;
-	for (let i in breads) {
+	for (let i=0; i<breads.length; i++) {
 		html.push(`<option value="${i}"${i == getMode(2) ? 'selected="selected"' : ''}>`);
 		if(breads[i].title){
 			html.push(`${breads[i].title}${breads[i].by ? " (by. "+ breads[i].by +")" : ""}`);
@@ -133,7 +133,7 @@ function drawRecipe(isUserChange) {
 	let recipeComment = breads[selBreadsIdx].recipeComment;
 	if(recipeComment) {
 		html.push(`<div class="dt under" style="padding-bottom:10px;">`);
-		for(let i in recipeComment){
+		for(let i=0; i<recipeComment.length; i++){
 			html.push(`<div class="dtr"><div class="dtc">${recipeComment[i]}</div></div>`);
 		}
 		html.push(`</div>`);
@@ -146,21 +146,21 @@ function drawRecipe(isUserChange) {
 		let tip = step.tip;
 		if(txt){
 			stepHtml.push(`<div>`);
-			for(let i in txt){
+			for(let i=0; i<txt.length; i++){
 				stepHtml.push(`<div>${txt[i]}</div>`);
 			}
 			stepHtml.push(`</div>`);
 		}
 		if(seq){
 			stepHtml.push(`<ol>`);
-			for(let i in seq) {
+			for(let i=0; i<seq.length; i++) {
 				stepHtml.push(`<li>${seq[i]}</li>`);
 			}
 			stepHtml.push(`</ol>`);
 		}
 		if(tip){
 			stepHtml.push(`<div>`);
-			for(let i in tip){
+			for(let i=0; i<tip.length; i++){
 				stepHtml.push(`<div>${tip[i]}</div>`);
 			}
 			stepHtml.push(`</div>`);
