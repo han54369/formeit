@@ -159,7 +159,7 @@ function drawRecipe(isUserChange) {
 			for(let i=0; i<seq.length; i++) {
 				stepHtml.push(
 					`<div class="dtr">
-						<div class="dtc seqNo">${i}. </div>
+						<div class="dtc seqNo">${(i+1)}. </div>
 						<div class="dtc seqTxt">${seq[i]}</div>
 					</div>`);
 			}
