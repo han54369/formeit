@@ -11,7 +11,7 @@
 }
 
 /* FOR ME, IT */
-.wiswellBody{max-width:400px;margin:auto;}
+.wiswellBody, .fontBtn{max-width:400px;margin:auto;}
 .wiswellBody, input, select{color:#000 !important;}
 .wiswellBody.maplestory, .wiswellBody.maplestory input, .wiswellBody.maplestory select{font-family:MaplestoryLight;}
 
