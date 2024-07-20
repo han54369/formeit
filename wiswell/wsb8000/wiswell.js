@@ -111,7 +111,8 @@ function drawRecipe(isUserChange) {
 			html.push(`		</div>
 							<div class="dtc unit">${recipe[key].unit ? recipe[key].unit : ""}</div>
 					  	</div>`);
-		});
+		//});
+		}
 			html.push(`	<div class="dtr weight">
 							<div class="dtc ingredient">합산 중량(g,ml)</div>
 							<div class="dtc numerical"><input type="number" id="totalWeight" disabled="disabled" value="${totalWeight}"/></div>
@@ -219,7 +220,8 @@ function changeNum(ratio){
 		if(recipe[key].unit == "g" || recipe[key].unit == "ml") {
 			totalWeight += ratioWeight;
 		}
-	});
+	//});
+	}
 	$("#totalWeight").val(totalWeight);
 	
 	rememberRatio();
