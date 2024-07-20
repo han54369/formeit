@@ -36,7 +36,7 @@ label input[type='checkbox']{vertical-align:middle;}
 .recipe .dtr:first-child{background-color:#e2d9d3;text-align:center;font-weight:bold;}
 .recipe .dtr:nth-child(even){background-color:#f5f2f0;}
 
-.under{background-color:#ebe8e5;}
+.under, .weight{background-color:#ebe8e5;}
 .weight, .weight input{font-weight:bold;}
 .weight{height:30px;border-top:1px solid black;}
 .weightComment{height:25px;font-size:13px;padding-bottom:5px;}

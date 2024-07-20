@@ -108,15 +108,13 @@ function drawRecipe(isUserChange) {
 							<div class="dtc unit">${recipe[key].unit ? recipe[key].unit : ""}</div>
 					  	</div>`);
 		});
-		html.push(`	</div>`);
-		html.push(`	<div class="dt under">
 						<div class="dtr weight">
 							<div class="dtc ingredient">합산 중량(g,ml)</div>
 							<div class="dtc numerical"><input type="number" id="totalWeight" disabled="disabled" value="${totalWeight}"/></div>
 							<div class="dtc unit">g</div>
 						</div>
-					</div>
-					<div class="dt under">
+		html.push(`	</div>`);
+		html.push(`	<div class="dt under">
 						<div class="dtr">
 							<div class="dtc weightComment">단위 '알, 개, 장, 큰술'은 중량 계산이 불가하여 합산 중량에서 제외함</div>
 						</div>
