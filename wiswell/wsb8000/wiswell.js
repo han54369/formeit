@@ -70,6 +70,9 @@ function drawRecipe(isUserChange) {
 	let breads = wiswell[selModesIdx].breads;
 	let recipe = breads[selBreadsIdx].recipe;
 	let rememberRatio = $.cookie("wsb8000_ratio-"+ selModesIdx +"-"+ selBreadsIdx);
+	alert(rememberRatio);
+	alert(rememberRatio == undefined);
+	alert(rememberRatio === undefined);
 	if (recipe != undefined) {
 		html.push(`	<div class="dt recipe">
 						<div class="dtr header">
