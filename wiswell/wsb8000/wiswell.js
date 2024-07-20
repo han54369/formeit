@@ -148,21 +148,21 @@ function drawRecipe(isUserChange) {
 		let seq = step.seq;
 		let tip = step.tip;
 		if(txt){
-			stepHtml.push(`<div>`);
+			stepHtml.push(`<div class="txt">`);
 			for(let i=0; i<txt.length; i++){
 				stepHtml.push(`<div>${txt[i]}</div>`);
 			}
 			stepHtml.push(`</div>`);
 		}
 		if(seq){
-			stepHtml.push(`<ol>`);
+			stepHtml.push(`<div class="seq">`);
 			for(let i=0; i<seq.length; i++) {
-				stepHtml.push(`<li>${seq[i]}</li>`);
+				stepHtml.push(`<div>${i}. ${seq[i]}</div>`);
 			}
-			stepHtml.push(`</ol>`);
+			stepHtml.push(`</div>`);
 		}
 		if(tip){
-			stepHtml.push(`<div>`);
+			stepHtml.push(`<div class="tip">`);
 			for(let i=0; i<tip.length; i++){
 				stepHtml.push(`<div>${tip[i]}</div>`);
 			}

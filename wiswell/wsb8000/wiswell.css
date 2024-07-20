@@ -37,8 +37,7 @@ label input[type='checkbox']{vertical-align:middle !important;}
 
 #step{background-color:#e6e7e8 !important;margin:8px 0px !important;}
 #step > *{padding:10px 2px !important;}
-ol,ul{margin:0px 0px 0px 20px !important;}
-ol li:not(:last-child){padding-bottom:10px !important;}
+.seq div:not(:last-child){padding-bottom:10px !important;}
 
 
 
