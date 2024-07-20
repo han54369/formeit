@@ -77,7 +77,9 @@ function drawRecipe(isUserChange) {
 							<div class="dtc numerical">중량</div>
 							<div class="dtc unit">단위</div>
 						</div>`);
-		Object.keys(recipe).map(key => { // Object.keys(recipe).sort().map(key => 
+		//Object.keys(recipe).map(key => { // Object.keys(recipe).sort().map(key => 
+		for(let i=0; i<recipe.length; i++){
+			let key = recipe[i];
 			if(recipe[key].unit == "g" || recipe[key].unit == "ml") {
 				totalWeight += recipe[key].max;
 			}
@@ -206,7 +208,9 @@ function changeNum(ratio){
 
 	let totalWeight = 0;
 	let recipe = wiswell[selModesIdx].breads[selBreadsIdx].recipe;
-	Object.keys(recipe).map(key => {
+	//Object.keys(recipe).map(key => {
+	for(let i=0; i<recipe.length; i++){
+		let key = recipe[i];
 		if(recipe[key].min != undefined){
 			$("input[data-idx3='"+ key +"'][data-idx4='min']").val(Math.round(recipe[key].min * ratio));
 		}
