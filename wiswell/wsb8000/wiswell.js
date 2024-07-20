@@ -11,9 +11,9 @@ $(document).ready(function(){
 });
 
 function getMode(num){
-	let rememeberMode = $.cookie("wsb8000_mode");
-	if(rememeberMode != undefined) {
-		let t = rememeberMode.split("-");
+	let rememberMode = $.cookie("wsb8000_mode");
+	if(rememberMode != undefined) {
+		let t = rememberMode.split("-");
 		let mode1 = t[0];
 		let mode2 = t[1];
 		
@@ -70,7 +70,6 @@ function drawRecipe(isUserChange) {
 	let breads = wiswell[selModesIdx].breads;
 	let recipe = breads[selBreadsIdx].recipe;
 	let rememberRatio = $.cookie("wsb8000_ratio-"+ selModesIdx +"-"+ selBreadsIdx);
-	let isRememberRatio = rememberRatio != undefined;
 	if (recipe != undefined) {
 		html.push(`	<div class="dt recipe">
 						<div class="dtr header">
@@ -125,7 +124,7 @@ function drawRecipe(isUserChange) {
 		html.push(`	<div class="dt under" style="padding-bottom:10px;">
 						<div class="dtr">
 							<div class="dtc">
-								<label><input type="checkbox" onchange="rememberRatio()" id="rememberRatio"${isRememberRatio ? ' checked="checked"' : '""'}> 현재 중량 저장</label>
+								<label><input type="checkbox" onchange="rememberRatio()" id="rememberRatio"${rememberRatio ? ' checked="checked"' : '""'}> 현재 중량 저장</label>
 							</div>
 							<div class="dtc tar" style="padding-right:10px;">
 								<input type="button" onclick="defaultRatio()" value="현재 중량 초기화"/><br/>
@@ -179,7 +178,7 @@ function drawRecipe(isUserChange) {
 	$("#step").html(stepHtml.join(""));
 
 	rememberMode();
-	if(isRememberRatio){
+	if(rememberRatio){
 		changeNum(rememberRatio);
 	}
 }
