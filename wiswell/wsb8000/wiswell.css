@@ -11,8 +11,9 @@
 }
 
 /* FOR ME, IT */
-.body, input, select{font-family:MaplestoryLight,roboto;color:#000 !important;}
-.body{max-width:400px;margin:auto;}
+.wiswellBody{max-width:400px;margin:auto;}
+.wiswellBody, input, select{color:#000 !important;}
+.wiswellBody.maplestory, .wiswellBody.maplestory input, .wiswellBody.maplestory select{font-family:MaplestoryLight;}
 
 .dt{display:table;width:100%;/* table-layout:fixed; */}
 .dtr{display:table-row;}
@@ -48,6 +49,10 @@ label input[type='checkbox']{vertical-align:middle;}
 .seq{width:100%;}
 .seq .seqNo{width:15px;vertical-align:top;white-space:nowrap;}
 .seq .dtr:not(:last-child) .dtc{padding-bottom:10px;}
+
+.fontBtn{text-align:right;margin-top:10px;}
+.fontBtn .fontDefault{}
+.fontBtn .fontMaplestory{font-family:MaplestoryLight;}
 
 
 

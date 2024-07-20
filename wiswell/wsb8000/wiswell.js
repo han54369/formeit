@@ -2,13 +2,15 @@
  * 무단 변경, 복제‧배포, 개작 등의 이용은 금지되며 비정상적으로 이용할 경우 저작권 침해로 민형사상 책임을 질 수 있음을 알려드립니다.
  */
 $(document).ready(function(){
-	$("#rememberMode").prop("checked", $.cookie("mode"));
+	$("#rememberMode").prop("checked", $.cookie("wsb8000_mode"));
+
+	changeFont($.cookie("wsb8000_font"));
 	
 	drawModes();
 });
 
 function getMode(num){
-	let rememeberMode = $.cookie("mode");
+	let rememeberMode = $.cookie("wsb8000_mode");
 	if(rememeberMode != undefined) {
 		let t = rememeberMode.split("-");
 		let mode1 = t[0];
@@ -34,7 +36,7 @@ function drawModes() {
 
 function drawBreads(isUserChange) {
 	if(isUserChange){
-		$.removeCookie('mode');
+		$.removeCookie('wsb8000_mode');
 	}
 	
 	let selModesIdx = $("select[name='modes'] option:selected").val();
@@ -55,7 +57,7 @@ function drawBreads(isUserChange) {
 
 function drawRecipe(isUserChange) {
 	if(isUserChange){
-		$.removeCookie('mode');
+		$.removeCookie('wsb8000_mode');
 	}
 	
 	let selModesIdx = $("select[name='modes'] option:selected").val();
@@ -66,7 +68,7 @@ function drawRecipe(isUserChange) {
 	let totalWeight = 0;
 	let breads = wiswell[selModesIdx].breads;
 	let recipe = breads[selBreadsIdx].recipe;
-	let rememberRatio = $.cookie("ratio-"+ selModesIdx +"-"+ selBreadsIdx);
+	let rememberRatio = $.cookie("wsb8000_ratio-"+ selModesIdx +"-"+ selBreadsIdx);
 	let isRememberRatio = rememberRatio != undefined;
 	if (recipe != undefined) {
 		html.push(`	<div class="dt recipe">
@@ -222,7 +224,7 @@ function changeNum(ratio){
 function rememberMode(){
 	let selModesIdx = $("select[name='modes'] option:selected").val();
 	let selBreadsIdx = $("select[name='breads'] option:selected").val();
-	let cookieName = "mode";
+	let cookieName = "wsb8000_mode";
 
 	if($("#rememberMode").is(":checked")){
 		$.cookie(cookieName, selModesIdx +"-"+ selBreadsIdx, { expires: (365*100)}); // , path: '/'
@@ -234,7 +236,7 @@ function rememberMode(){
 function rememberRatio(){
 	let selModesIdx = $("select[name='modes'] option:selected").val();
 	let selBreadsIdx = $("select[name='breads'] option:selected").val();
-	let cookieName = "ratio-"+ selModesIdx +"-"+ selBreadsIdx;
+	let cookieName = "wsb8000_ratio-"+ selModesIdx +"-"+ selBreadsIdx;
 
 	if($("#rememberRatio").is(":checked")){
 		let el = $("input[type='number']").eq(0);
@@ -251,8 +253,19 @@ function rememberRatio(){
 function defaultRatio(){
 	let selModesIdx = $("select[name='modes'] option:selected").val();
 	let selBreadsIdx = $("select[name='breads'] option:selected").val();
-	let cookieName = "ratio-"+ selModesIdx +"-"+ selBreadsIdx;
+	let cookieName = "wsb8000_ratio-"+ selModesIdx +"-"+ selBreadsIdx;
 	$.removeCookie(cookieName);
 	
 	drawRecipe();
+}
+
+function changeFont(val){
+	let cookieName = "wsb8000_font";
+	if(val == "maplestory"){
+		$(".wiswellBody").addClass(val);
+		$.cookie(cookieName, val, { expires: (365*100)});
+	} else {
+		$(".wiswellBody").removeClass("maplestory");
+		$.removeCookie(cookieName);
+	}
 }
