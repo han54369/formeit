@@ -43,7 +43,7 @@ ol li:not(:last-child){padding-bottom:10px !important;}
 
 
 @font-face {
-    font-family: 'MaplestoryLight' !important;
-    src: url('../../font/MaplestoryLight.woff') format('woff') !important;
-    font-display: swap !important;
+    font-family: 'MaplestoryLight';
+    src: url('../../font/MaplestoryLight.woff') format('woff');
+    font-display: swap;
 }
