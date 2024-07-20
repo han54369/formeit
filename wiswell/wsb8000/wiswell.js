@@ -155,9 +155,13 @@ function drawRecipe(isUserChange) {
 			stepHtml.push(`</div>`);
 		}
 		if(seq){
-			stepHtml.push(`<div class="seq">`);
+			stepHtml.push(`<div class="seq dt">`);
 			for(let i=0; i<seq.length; i++) {
-				stepHtml.push(`<div>${i}. ${seq[i]}</div>`);
+				stepHtml.push(
+					`<div class="dtr">
+						<div class="dtc seqNo">${i}. </div>
+						<div class="dtc seqTxt">${seq[i]}</div>
+					</div>`);
 			}
 			stepHtml.push(`</div>`);
 		}

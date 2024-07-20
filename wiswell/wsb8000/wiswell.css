@@ -37,7 +37,9 @@ label input[type='checkbox']{vertical-align:middle !important;}
 
 #step{background-color:#e6e7e8 !important;margin:8px 0px !important;}
 #step > *{padding:10px 2px !important;}
-.seq div:not(:last-child){padding-bottom:10px !important;}
+.seq{width:100% !important;}
+.seq .seqNo{width:20px !important;vertical-align:top !important;}
+.seq .dtr:not(:last-child) .dtc{padding-bottom:10px !important;}
 
 
 
