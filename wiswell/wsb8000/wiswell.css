@@ -3,43 +3,43 @@
 /**
  * 이 컨텐츠는 무단 변경, 복제‧배포, 개작 등의 이용은 금지되며 비정상적으로 이용할 경우 저작권 침해로 민형사상 책임을 질 수 있음을 알려드립니다.
  */
-.body{max-width:400px !important;margin:auto !important;font-family:MaplestoryLight,roboto !important;}
+.body{max-width:400px;margin:auto;font-family:MaplestoryLight,roboto;}
 
-.dt{display:table !important;width:100% !important;/* table-layout:fixed !important; */}
-.dtr{display:table-row !important;}
-.dtc{display:table-cell !important;vertical-align:middle !important;padding:0px 2px !important;}
+.dt{display:table;width:100%;/* table-layout:fixed; */}
+.dtr{display:table-row;}
+.dtc{display:table-cell;vertical-align:middle;padding:0px 2px;}
 
-.tar{text-align:right !important;}
+.tar{text-align:right;}
 
-label{cursor:pointer !important;}
-label input[type='checkbox']{vertical-align:middle !important;}
+label{cursor:pointer;}
+label input[type='checkbox']{vertical-align:middle;}
 
-.modes{width:100% !important;height:30px !important;margin-bottom:5px !important;}
+.modes{width:100%;height:30px;margin-bottom:5px;}
 
-.title{font-size:17px !important;font-weight:bold !important;}
+.title{font-size:17px;font-weight:bold;}
 
 .ingredient{}
-.numerical{width:150px !important;}
-.numerical input[type='number'], .numerical input[type='button']{width:100% !important;height:24px !important;box-sizing:border-box !important;}
-.numerical input[type='number']{text-align:right !important;}
-.unit{text-align:left !important;width:33px !important;}
+.numerical{width:150px;}
+.numerical input[type='number'], .numerical input[type='button']{width:100%;height:24px;box-sizing:border-box;}
+.numerical input[type='number']{text-align:right;}
+.unit{text-align:left;width:33px;}
 
-#recipe{border:1px solid #767676 !important;margin:8px 0px !important;}
-.recipe .dtr{height:30px !important;}
-.recipe .dtr:first-child{background-color:#e2d9d3 !important;text-align:center !important;font-weight:bold !important;}
-.recipe .dtr:nth-child(even){background-color:#f5f2f0 !important;}
+#recipe{border:1px solid #767676;margin:8px 0px;}
+.recipe .dtr{height:30px;}
+.recipe .dtr:first-child{background-color:#e2d9d3;text-align:center;font-weight:bold;}
+.recipe .dtr:nth-child(even){background-color:#f5f2f0;}
 
-.under{background-color:#ebe8e5 !important;}
-.weight, .weight input{font-weight:bold !important;}
-.weight{height:30px !important;border-top:1px solid black !important;}
-.weightComment{height:25px !important;font-size:13px !important;padding-bottom:5px !important;}
-.btn{width:100px !important;text-align:center !important;}
+.under{background-color:#ebe8e5;}
+.weight, .weight input{font-weight:bold;}
+.weight{height:30px;border-top:1px solid black;}
+.weightComment{height:25px;font-size:13px;padding-bottom:5px;}
+.btn{width:100px;text-align:center;}
 
-#step{background-color:#e6e7e8 !important;margin:8px 0px !important;}
-#step > *{padding:10px 2px !important;}
-.seq{width:100% !important;}
-.seq .seqNo{width:15px !important;vertical-align:top !important;}
-.seq .dtr:not(:last-child) .dtc{padding-bottom:10px !important;}
+#step{background-color:#e6e7e8;margin:8px 0px;}
+#step > *{padding:10px 2px;}
+.seq{width:100%;}
+.seq .seqNo{width:15px;vertical-align:top;}
+.seq .dtr:not(:last-child) .dtc{padding-bottom:10px;}
 
 
 
