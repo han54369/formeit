@@ -4,6 +4,7 @@
 $(document).ready(function(){
 	$("#rememberMode").prop("checked", $.cookie("wsb8000_mode"));
 
+	$("input[name='wiswellFont'][value='"+ $.cookie("wsb8000_font") +"'").prop("checked", true);
 	changeFont($.cookie("wsb8000_font"));
 	
 	drawModes();
