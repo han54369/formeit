@@ -11,7 +11,8 @@
 }
 
 /* FOR ME, IT */
-.body{max-width:400px;margin:auto;font-family:MaplestoryLight,roboto;}
+.body, input, select{font-family:MaplestoryLight,roboto;}
+.body{max-width:400px;margin:auto;}
 
 .dt{display:table;width:100%;/* table-layout:fixed; */}
 .dtr{display:table-row;}
