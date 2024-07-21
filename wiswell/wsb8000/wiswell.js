@@ -245,9 +245,9 @@ function updateAllNum(el) {
 	$("#totalWeight").val(totalWeight);
 	$("#defaultBtn").css("display", ratio == 1);
 	if(ratio == 1) {
-		$("#defaultBtn").hide();
+		$("#defaultBtn").css("color", "#a3a3a1");
 	} else {
-		$("#defaultBtn").show();
+		$("#defaultBtn").css("color", "");
 	}
 }
 function getRatio(el) {
