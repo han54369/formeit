@@ -18,7 +18,6 @@
 
 .vat{vertical-align:top;}
 .tar{text-align:right;}
-.w100{width:100%;}
 
 label{cursor:pointer;}
 label input{vertical-align:middle;}
@@ -42,7 +41,8 @@ label input{vertical-align:middle;}
 .totalWeight .dtc{border-top:1px solid #767676;}
 .totalWeight, #totalWeight{font-weight:bold;color:#000;}
 .totalComment{font-size:13px;}
-
+.revertDefault{vertical-align:top;}
+.revertDefault > input{width:100%;}
 
 
 
