@@ -21,6 +21,7 @@
 
 label{cursor:pointer;}
 /*label input{vertical-align:middle;}*/
+label input{position:relative;}
 
 .modesTitle{font-size:17px;font-weight:bold;}
 .modesSelect, .breadsSelect{width:100%;height:30px;margin-bottom:5px;}
