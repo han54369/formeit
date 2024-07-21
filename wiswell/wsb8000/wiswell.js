@@ -111,7 +111,7 @@ function drawRecipe(isUserChange) {
 		});
 		html.push(`
 				<div class="dtr recipeUnder totalWeight">
-					<div class="dtc">합 (g+ml)</div>
+					<div class="dtc">합 (g + ml)</div>
 					<div class="dtc"><input type="number" id="totalWeight" disabled="disabled" value="${totalWeight}"/></div>
 					<div class="dtc">g</div>
 				</div>
