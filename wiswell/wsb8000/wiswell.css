@@ -46,7 +46,7 @@ label{cursor:pointer;}
 
 .recipeUnder .dtc{background-color:#ebe8e5;}
 .totalWeight .dtc{border-top:1px solid #767676;}
-.totalWeight, #totalWeight{font-weight:bold;}
+.totalWeight, #totalWeight{font-weight:bold;color:#000;}
 .totalComment{font-size:13px;}
 
 
