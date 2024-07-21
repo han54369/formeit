@@ -12,7 +12,7 @@
 
 /*** FOR ME, IT ***/
 .wiswellBody{max-width:400px;margin:auto;}
-.wiswellBody, input, select{font-size:16px;/* color:#000 !important; */}
+.wiswellBody, input:not(:disabled), select:not(:disabled){font-size:16px;color:#000 !important;}
 .maplestory, #wiswellContent.maplestory, #wiswellContent.maplestory input, #wiswellContent.maplestory select{font-family:MaplestoryLight;}
 
 .dt{display:table;width:100%;}
