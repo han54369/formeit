@@ -16,6 +16,7 @@
 .dt.padLR > .dtr > .dtc:last-child{padding-right:5px;}
 .dt.vam > .dtr > .dtc{vertical-align:middle;}
 
+.vat{vertical-align:top;}
 .tar{text-align:right;}
 .w100{width:100%;}
 
