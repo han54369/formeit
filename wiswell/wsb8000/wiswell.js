@@ -243,7 +243,12 @@ function updateAllNum(el) {
 		}
 	});
 	$("#totalWeight").val(totalWeight);
-	$("#defaultBtn").prop("disabled", ratio == 1);
+	$("#defaultBtn").css("display", ratio == 1);
+	if(ratio == 1) {
+		$("#defaultBtn").hide();
+	} else {
+		$("#defaultBtn").show();
+	}
 }
 function getRatio(el) {
 	let val;
