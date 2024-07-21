@@ -117,7 +117,7 @@ function drawRecipe(isUserChange) {
 				</div>
 				<div class="dtr recipeUnder">
 					<div class="dtc totalComment">단위 '알,개,장,큰술'은 합에서 제외 (중량 X)</div>
-					<div class="dtc"><input type="button" id="defaultBtn" class="w100" onclick="setDefaultRatio()" value="기본값으로 복구"></div>
+					<div class="dtc vat"><input type="button" id="defaultBtn" class="w100" onclick="setDefaultRatio()" value="기본값으로 보기"></div>
 					<div class="dtc"></div>
 				</div>
 			</div>`
