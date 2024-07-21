@@ -243,12 +243,7 @@ function updateAllNum(el) {
 		}
 	});
 	$("#totalWeight").val(totalWeight);
-	$("#defaultBtn").css("display", ratio == 1);
-	if(ratio == 1) {
-		$("#defaultBtn").css("color", "#a3a3a1");
-	} else {
-		$("#defaultBtn").css("color", "");
-	}
+	$("#defaultBtn").prop("disabled", ratio == 1);
 }
 function getRatio(el) {
 	let val;
