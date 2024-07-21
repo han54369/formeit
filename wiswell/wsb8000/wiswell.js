@@ -1,271 +1,299 @@
 /**
  * 무단 변경, 복제‧배포, 개작 등의 이용은 금지되며 비정상적으로 이용할 경우 저작권 침해로 민형사상 책임을 질 수 있음을 알려드립니다.
  */
-$(document).ready(function(){
-	$("#rememberMode").prop("checked", $.cookie("wsb8000_mode"));
+const CN_FONT = "wiswell_wsb8000_font";
+const CN_MODE = "wiswell_wsb8000_mode";
+const CN_BREAD = "wiswell_wsb8000_bread";
+const CN_RATIO = "wiswell_wsb8000_ratio";
 
-	$("input[name='wiswellFont'][value='"+ $.cookie("wsb8000_font") +"'").prop("checked", true);
-	changeFont($.cookie("wsb8000_font"));
-	
+$(document).ready(function() {
+	$("input[name='wiswellFont'][value='" + getCookieFont() + "'").prop("checked", true);
+	changeFont();
+	$("#rememberMode").prop("checked", $.cookie(CN_MODE));
+	$("#rememberRatio").prop("checked", $.cookie(CN_RATIO));
+
 	drawModes();
 });
 
-function getMode(num){
-	let rememberMode = $.cookie("wsb8000_mode");
-	if(rememberMode != undefined) {
-		let t = rememberMode.split("-");
-		let mode1 = t[0];
-		let mode2 = t[1];
-		
-		if(num == 1){
-			return mode1;
-		} else if(num == 2) {
-			return mode2;
-		}
-	}
-}
-
 function drawModes() {
 	let html = new Array();
-	for (let i=0; i<wiswell.length; i++) {
-		html.push(`<option value="${i}"${i == getMode(1) ? 'selected="selected"' : ''}>${wiswell[i].mode}</option>`);
+	for (let i = 0; i < wiswell.length; i++) {
+		html.push(`<option value="${i}" ${i == $.cookie(CN_MODE) ? 'selected="selected"' : ''}>${wiswell[i].mode}</option>`);
 	}
 	$("select[name='modes']").html(html.join(""));
 
 	drawBreads();
 }
 
-function drawBreads(isUserChange) {
-	if(isUserChange){
-		$.removeCookie('wsb8000_mode');
+function drawBreads(isUserAction) {
+	if (isUserAction) {
+		$.removeCookie(CN_BREAD);
 	}
-	
+
 	let selModesIdx = $("select[name='modes'] option:selected").val();
-	
-	let html = new Array();
 	let breads = wiswell[selModesIdx].breads;
-	for (let i=0; i<breads.length; i++) {
-		html.push(`<option value="${i}"${i == getMode(2) ? 'selected="selected"' : ''}>`);
-		if(breads[i].title){
-			html.push(`${breads[i].title}${breads[i].by ? " (by. "+ breads[i].by +")" : ""}`);
+
+	let html = new Array();
+	for (let i = 0; i < breads.length; i++) {
+		html.push(`<option value="${i}" ${i == $.cookie(CN_BREAD) ? 'selected="selected"' : ''}>`);
+		if (breads[i].title) {
+			html.push(`${breads[i].title}${breads[i].by ? " (by. " + breads[i].by + ")" : ""}`);
 		}
 		html.push(`</option>`);
 	}
 	$("select[name='breads']").html(html.join("")).prop("disabled", breads[0].title == undefined);
 
-	drawRecipe();
+	drawRecipe(isUserAction);
 }
 
 function drawRecipe(isUserChange) {
-	if(isUserChange){
-		$.removeCookie('wsb8000_mode');
+	if (isUserChange) {
+		setCookieMode();
 	}
-	
+
 	let selModesIdx = $("select[name='modes'] option:selected").val();
 	let selBreadsIdx = $("select[name='breads'] option:selected").val();
-
-	let html = new Array();
-	let stepHtml = new Array();
-	let totalWeight = 0;
 	let breads = wiswell[selModesIdx].breads;
 	let recipe = breads[selBreadsIdx].recipe;
-	let rememberRatio = $.cookie("wsb8000_ratio-"+ selModesIdx +"-"+ selBreadsIdx);
+	let totalWeight = 0;
+
+	let html = new Array();
 	if (recipe != undefined) {
-		html.push(`	<div class="dt recipe">
-						<div class="dtr header">
-							<div class="dtc ingredient">재료</div>
-							<div class="dtc numerical">중량</div>
-							<div class="dtc unit">단위</div>
-						</div>`);
-		Object.keys(recipe).map(key => { // Object.keys(recipe).sort().map(key => 
-			if(recipe[key].unit == "g" || recipe[key].unit == "ml") {
+		html.push(`
+			<div class="dt recipeT vam padL">
+				<div class="dtr recipeHeader">
+					<div class="dtc ingredient">재료</div>
+					<div class="dtc numerical">중량</div>
+					<div class="dtc unit">단위</div>
+				</div>`
+		);
+
+		Object.keys(recipe).map(key => {
+			if (recipe[key].unit == "g" || recipe[key].unit == "ml") {
 				totalWeight += recipe[key].max;
 			}
-			
-			html.push(`	<div class="dtr">
-							<div class="dtc ingredient">${key}</div>
-							<div class="dtc numerical">`);
-								if(recipe[key].unit){
-									if(recipe[key].min != undefined){
-										html.push(
-											`<input type="number" value="${recipe[key].min}" onkeyup="getRatio(this)" onchange="getRatio(this)"
-												style="width:66px"
-												data-idx1="${selModesIdx}"
-												data-idx2="${selBreadsIdx}"
-												data-idx3="${key}"
-												data-idx4="min"
-											> ~ `);
-									}
-									
-									html.push(
-											`<input type="number" value="${recipe[key].max}" onkeyup="getRatio(this)" onchange="getRatio(this)"
-												style="${recipe[key].min == undefined ? '' : 'width:65px'}"
-												data-idx1="${selModesIdx}"
-												data-idx2="${selBreadsIdx}"
-												data-idx3="${key}"
-												data-idx4="max"
-											>`);
-								}
-			html.push(`		</div>
-							<div class="dtc unit">${recipe[key].unit ? recipe[key].unit : ""}</div>
-					  	</div>`);
-		});
-			html.push(`	<div class="dtr weight">
-							<div class="dtc ingredient">합산 중량(g,ml)</div>
-							<div class="dtc numerical"><input type="number" id="totalWeight" disabled="disabled" value="${totalWeight}"/></div>
-							<div class="dtc unit">g</div>
-						</div>
-					</div>`);
-		html.push(`	<div class="dt under">
-						<div class="dtr">
-							<div class="dtc weightComment">단위 '알, 개, 장, 큰술'은 중량 계산이 불가하여 합산 중량에서 제외함</div>
-						</div>
-					</div>`);
-		html.push(`	<div class="dt under" style="padding-bottom:10px;">
-						<div class="dtr">
+
+			html.push(`
+				<div class="dtr">
+					<div class="dtc">${key}</div>
+					<div class="dtc">`
+			);
+
+			if (recipe[key].max) {
+				if (recipe[key].min != undefined) {
+					html.push(`
+						<div class="dt">
 							<div class="dtc">
-								<label><input type="checkbox" onchange="rememberRatio()" id="rememberRatio"${rememberRatio ? ' checked="checked"' : '""'}> 현재 중량 저장</label>
+								<input type="number" value="${recipe[key].min}" onkeyup="updateNum(this)" onchange="updateNum(this)"
+									data-idx1="${selModesIdx}" data-idx2="${selBreadsIdx}" data-idx3="${key}" data-idx4="min">
 							</div>
-							<div class="dtc tar" style="padding-right:10px;">
-								<input type="button" onclick="defaultRatio()" value="현재 중량 초기화"/><br/>
+							<div class="dtc"> ~ </div>
+							<div class="dtc">`
+					);
+				}
+
+				html.push(`		<input type="number" value="${recipe[key].max}" onkeyup="updateNum(this)" onchange="updateNum(this)"
+									data-idx1="${selModesIdx}" data-idx2="${selBreadsIdx}" data-idx3="${key}" data-idx4="max">`
+				);
+
+				if (recipe[key].min != undefined) {
+					html.push(`
 							</div>
-						</div>
-					</div>`);
+						</div>`
+					);
+				}
+			}
+			html.push(`
+					</div>
+					<div class="dtc">${recipe[key].unit ? recipe[key].unit : ""}</div>
+				</div>`
+			);
+		});
+		html.push(`
+				<div class="dtr recipeUnder totalWeight">
+					<div class="dtc">합 (g+ml)</div>
+					<div class="dtc"><input type="number" id="totalWeight" disabled="disabled" value="${totalWeight}"/></div>
+					<div class="dtc">g</div>
+				</div>
+				<div class="dtr recipeUnder">
+					<div class="dtc totalComment">단위 '알,개,장,큰술'은<br/>합에서 제외 (중량 X)</div>
+					<div class="dtc"><input type="button" id="defaultBtn" class="w100" onclick="setDefaultRatio()" value="기본값으로 복구"></div>
+					<div class="dtc"></div>
+				</div>
+			</div>`
+		);
 	}
-	
+
 	let recipeComment = breads[selBreadsIdx].recipeComment;
-	if(recipeComment) {
-		html.push(`<div class="dt under" style="padding-bottom:10px;">`);
-		for(let i=0; i<recipeComment.length; i++){
-			html.push(`<div class="dtr"><div class="dtc">${recipeComment[i]}</div></div>`);
+	if (recipeComment) {
+		html.push(`
+			<div class="dt padLR">`
+		);
+		for (let i = 0; i < recipeComment.length; i++) {
+			html.push(`
+				<div class="dtr">
+					<div class="dtc">${recipeComment[i]}</div>
+				</div>`
+			);
 		}
-		html.push(`</div>`);
+		html.push(`
+			</div>`
+		);
 	}
-	
+	$("#recipeDiv").html(html.join(""));
+
+
+
 	let step = breads[selBreadsIdx].step;
-	if(step){
+	html = new Array();
+	if (step) {
 		let txt = step.txt;
 		let seq = step.seq;
 		let tip = step.tip;
-		if(txt){
-			stepHtml.push(`<div class="txt">`);
-			for(let i=0; i<txt.length; i++){
-				stepHtml.push(`<div>${txt[i]}</div>`);
+		if (txt) {
+			html.push(`<div class="txt">`);
+			for (let i = 0; i < txt.length; i++) {
+				html.push(`<div>${txt[i]}</div>`);
 			}
-			stepHtml.push(`</div>`);
+			html.push(`</div>`);
 		}
-		if(seq){
-			stepHtml.push(`<div class="seq dt">`);
-			for(let i=0; i<seq.length; i++) {
-				stepHtml.push(
-					`<div class="dtr">
-						<div class="dtc seqNo">${(i+1)}. </div>
-						<div class="dtc seqTxt">${seq[i]}</div>
-					</div>`);
+		if (seq) {
+			html.push(`<div class="seq dt">`);
+			for (let i = 0; i < seq.length; i++) {
+				html.push(`	<div class="dtr">
+								<div class="dtc seqNo">${(i + 1)}. </div>
+								<div class="dtc seqTxt">${seq[i]}</div>
+							</div>`
+				);
 			}
-			stepHtml.push(`</div>`);
+			html.push(`</div>`);
 		}
-		if(tip){
-			stepHtml.push(`<div class="tip">`);
-			for(let i=0; i<tip.length; i++){
-				stepHtml.push(`<div>${tip[i]}</div>`);
+		if (tip) {
+			html.push(`<div class="tip">`);
+			for (let i = 0; i < tip.length; i++) {
+				html.push(`<div>${tip[i]}</div>`);
 			}
-			stepHtml.push(`</div>`);
+			html.push(`</div>`);
 		}
 	}
-	
-	$("#recipe").html(html.join(""));
-	$("#step").html(stepHtml.join(""));
+	$("#stepDiv").html(html.join(""));
 
-	rememberMode();
-	if(rememberRatio){
-		changeNum(rememberRatio);
+	updateAllNum();
+}
+
+
+
+
+
+function getCookieFont(){
+	return $.cookie(CN_FONT) ? $.cookie(CN_FONT) : "";
+}
+function setCookieFont(el) {
+	el = $(el);
+	if (el.val() == "" || el.val() == undefined) {
+		$.removeCookie(CN_FONT);
+	} else {
+		$.cookie(CN_FONT, el.val(), getCookieOpt());
+	}
+	changeFont();
+}
+function changeFont() {
+	let fontName = getCookieFont();
+	if (fontName == "") {
+		$("#wiswellContent").removeClass();
+	} else {
+		$("#wiswellContent").addClass(fontName);
 	}
 }
 
-function getRatio(el){
-	let data = $(el).data();
-	let selModesIdx = $("select[name='modes'] option:selected").val();
-	let selBreadsIdx = $("select[name='breads'] option:selected").val();
-	let selRecipeIdx = data.idx3;
-	let isMin = data.idx4 == "min";
-		
-	let source = wiswell[selModesIdx].breads[selBreadsIdx].recipe[selRecipeIdx].max;
-	if(isMin){
-		source = wiswell[selModesIdx].breads[selBreadsIdx].recipe[selRecipeIdx].min;
+
+
+function setCookieMode() {
+	if ($("#rememberMode").is(":checked")) {
+		$.cookie(CN_MODE, $("select[name='modes'] option:selected").val(), getCookieOpt());
+		$.cookie(CN_BREAD, $("select[name='breads'] option:selected").val(), getCookieOpt());
+	} else {
+		$.removeCookie(CN_MODE);
+		$.removeCookie(CN_BREAD);
 	}
-	let change = Number($(el).val());
-	let ratio = change / source;
-	
-	changeNum(ratio);
 }
 
-function changeNum(ratio){
+
+
+
+
+function updateNum(el) {
+	setCookieRatio(el);
+	updateAllNum(el);
+}
+function updateAllNum(el) {
 	let selModesIdx = $("select[name='modes'] option:selected").val();
 	let selBreadsIdx = $("select[name='breads'] option:selected").val();
-
-	let totalWeight = 0;
 	let recipe = wiswell[selModesIdx].breads[selBreadsIdx].recipe;
+	let ratio = getRatio(el);
+	let totalWeight = 0;
 	Object.keys(recipe).map(key => {
-		if(recipe[key].min != undefined){
-			$("input[data-idx3='"+ key +"'][data-idx4='min']").val(Math.round(recipe[key].min * ratio));
+		if (recipe[key].min != undefined) {
+			$("input[data-idx3='" + key + "'][data-idx4='min']").val(Math.round(recipe[key].min * ratio));
 		}
 		let ratioWeight = Math.round(recipe[key].max * ratio); // .toLocaleString()
-		$("input[data-idx3='"+ key +"'][data-idx4='max']").val(ratioWeight);
-		if(recipe[key].unit == "g" || recipe[key].unit == "ml") {
+		$("input[data-idx3='" + key + "'][data-idx4='max']").val(ratioWeight);
+		if (recipe[key].unit == "g" || recipe[key].unit == "ml") {
 			totalWeight += ratioWeight;
 		}
 	});
 	$("#totalWeight").val(totalWeight);
-	
-	rememberRatio();
+	$("#defaultBtn").prop("disabled", ratio == 1);
 }
-
-function rememberMode(){
+function getRatio(el) {
+	let val;
 	let selModesIdx = $("select[name='modes'] option:selected").val();
 	let selBreadsIdx = $("select[name='breads'] option:selected").val();
-	let cookieName = "wsb8000_mode";
-
-	if($("#rememberMode").is(":checked")){
-		$.cookie(cookieName, selModesIdx +"-"+ selBreadsIdx, { expires: (365*100)}); // , path: '/'
+	if ($("#rememberRatio").is(":checked")) {
+		val = JSON.parse($.cookie(CN_RATIO))[selModesIdx + "-" + selBreadsIdx];
 	} else {
-		$.removeCookie(cookieName);
+		if(el == undefined) {
+			val = 1;
+		} else {
+			let data = $(el).data();
+			let r = wiswell[selModesIdx].breads[selBreadsIdx].recipe[data.idx3]
+			let source = data.idx4 == "min" ? r.min : r.max;
+			let change = Number($(el).val());
+			val = change / source;
+		}
 	}
+	return val == undefined ? 1 : val;
 }
-
-function rememberRatio(){
-	let selModesIdx = $("select[name='modes'] option:selected").val();
-	let selBreadsIdx = $("select[name='breads'] option:selected").val();
-	let cookieName = "wsb8000_ratio-"+ selModesIdx +"-"+ selBreadsIdx;
-
-	if($("#rememberRatio").is(":checked")){
-		let el = $("input[type='number']").eq(0);
+function setCookieRatio(el) {
+	if ($("#rememberRatio").is(":checked")) {
+		let selModesIdx = $("select[name='modes'] option:selected").val();
+		let selBreadsIdx = $("select[name='breads'] option:selected").val();
+		el = el == undefined ? $("input[type='number']").eq(0) : $(el);
 		let source = wiswell[selModesIdx].breads[selBreadsIdx].recipe[el.data().idx3].max;
 		let change = Number(el.val());
-		let ratio = change / source;
-		
-		$.cookie(cookieName, ratio, { expires: (365*100)}); // , path: '/'
+		let json = $.cookie(CN_RATIO) ? JSON.parse($.cookie(CN_RATIO)) : new Object();
+		json[selModesIdx + "-" + selBreadsIdx] = change / source;
+		$.cookie(CN_RATIO, JSON.stringify(json), getCookieOpt());
 	} else {
-		$.removeCookie(cookieName);
+		$.removeCookie(CN_RATIO);
 	}
 }
 
-function defaultRatio(){
-	let selModesIdx = $("select[name='modes'] option:selected").val();
-	let selBreadsIdx = $("select[name='breads'] option:selected").val();
-	let cookieName = "wsb8000_ratio-"+ selModesIdx +"-"+ selBreadsIdx;
-	$.removeCookie(cookieName);
-	
-	drawRecipe();
+function setDefaultRatio() {
+	if ($("#rememberRatio").is(":checked")) {
+		let selModesIdx = $("select[name='modes'] option:selected").val();
+		let selBreadsIdx = $("select[name='breads'] option:selected").val();
+		let json = JSON.parse($.cookie(CN_RATIO));
+		delete json[selModesIdx + "-" + selBreadsIdx];
+		$.cookie(CN_RATIO, JSON.stringify(json), getCookieOpt());
+	}
+	updateAllNum();
 }
 
-function changeFont(val){
-	let cookieName = "wsb8000_font";
-	if(val == "maplestory"){
-		$(".wiswellBody").addClass(val);
-		$.cookie(cookieName, val, { expires: (365*100)});
-	} else {
-		$(".wiswellBody").removeClass("maplestory");
-		$.removeCookie(cookieName);
-	}
+
+
+
+
+function getCookieOpt() {
+	return { expires: (365 * 100) }; // , path: '/'
 }
