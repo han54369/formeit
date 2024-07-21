@@ -49,7 +49,7 @@ label{cursor:pointer;}
 #stepDiv > *{padding:10px 0px;}
 .seq{width:100%;}
 .seq .seqNo{width:20px;white-space:nowrap;}
-.seq .dtr:not(:last-child) .dtc{padding-bottom:10px;}
+.seq .dtr:not(:last-child) .dtc{padding-bottom:8px;}
 
 .wiswellFont .fontDefault{}
 .wiswellFont .fontMaplestory{font-family:MaplestoryLight;}
