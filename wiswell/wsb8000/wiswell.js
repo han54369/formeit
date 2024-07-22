@@ -243,7 +243,7 @@ function updateAllNum(el) {
 		}
 	});
 	$("#totalWeight").val(totalWeight);
-	$("#defaultBtn").prop("disabled", ratio == 1).css("color", ratio == 1 ? "gray" : "");
+	$("#defaultBtn").prop("disabled", ratio == 1);
 }
 function getRatio(el) {
 	let val;
