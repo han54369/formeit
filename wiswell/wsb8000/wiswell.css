@@ -42,7 +42,7 @@ label{cursor:pointer;}
 .totalComment{font-size:13px;}
 .dt.vam .recipeUnder .revertDefault{vertical-align:top;}
 .revertDefault > input{width:100%;}
-
+.revertDefault > input:disabled{color:gray;}
 
 
 #stepDiv{background-color:#e6e7e8;margin:8px 0px;padding:0px 5px;}
